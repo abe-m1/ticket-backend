@@ -29,4 +29,12 @@ app.use(function (req, res, next) {
     return res.render('index');
 });
 
-module.exports = app
+//server setup
+const port = process.env.PORT || 5000
+
+//create HTTP server and forward it to our express application
+const server = http.createServer(app)
+
+//tell server to listen
+server.listen(port)
+console.log('server listen on: ', port)
