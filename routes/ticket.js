@@ -6,6 +6,7 @@ var TicketController = require('../controllers/ticket_controller')
 var User = require('../models/user.model');
 
 router.post('/', TicketController.newTicket);
+router.get('/', TicketController.getAllTickets)
 
 
 
