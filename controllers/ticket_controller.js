@@ -57,3 +57,40 @@ exports.newTicket = function (req, res, next) {
     });
 };
 
+exports.editTicket = function (req, res, next) {
+    var decoded = jwt.decode(req.query.token);
+    Ticket.findById(req.params.id, function (err, ticket) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        if (!ticket) {
+            return res.status(500).json({
+                title: 'No Ticket Found!',
+                error: {message: 'Ticket not found'}
+            });
+        }
+        if (ticket.user != decoded.user._id) {
+            return res.status(401).json({
+                title: 'Not Authenticated',
+                error: {message: 'Users do not match'}
+            });
+        }
+        ticket.description = req.body.description;
+        ticket.save(function (err, result) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Updated message',
+                obj: result
+            });
+        });
+    });
+};
+
