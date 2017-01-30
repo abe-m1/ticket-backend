@@ -1,13 +1,15 @@
 const User = require('../models/user.model')
 var bcrypt = require('bcryptjs');
-var jwt = require('jsonwebtoken');
+const jwt  = require('jwt-simple')
 
 function tokenForUser(user){
     const timestamp = new Date().getTime()
-    return jwt.encode({ sub: user.id, iat: timestamp}, config.secret)
+    return jwt.encode({ sub: user.id, iat: timestamp}, 'secret')
 }
 
 exports.signup = function(req, res, next){
+
+    console.log('REq Body', req.body)
     const firstName = req.body.firstName
     const lastName = req.body.lastName
     const password =  bcrypt.hashSync(req.body.password, 10)
@@ -71,7 +73,7 @@ exports.signin = function(req, res, next){
                 error: {message: 'Invalid login credentials'}
             });
         }
-        var token = jwt.sign({user: user}, 'secret', {expiresIn: 7200});
+        var token = tokenForUser(user)
         res.status(200).json({
             message: 'Successfully logged in',
             token: token,

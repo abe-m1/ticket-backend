@@ -1,11 +1,13 @@
 var express = require('express');
 var router = express.Router();
+var bcrypt = require('bcryptjs');
+var jwt = require('jsonwebtoken');
+var UserController = require('../controllers/user_controller')
 
-const User = require('../controllers/user_controller')
+var User = require('../models/user.model');
 
+router.post('/', UserController.signup);
 
-module.exports = function(app){ 
-router.post('/signup', User.signup)
-router.post('/signin', User.signin)
+router.post('/signin', UserController.signin);
 
-}
+module.exports = router;
