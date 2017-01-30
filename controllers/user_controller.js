@@ -1,10 +1,10 @@
 const User = require('../models/user.model')
 var bcrypt = require('bcryptjs');
-const jwt  = require('jwt-simple')
+const jwt  = require('jsonwebtoken')
 
 function tokenForUser(user){
-    const timestamp = new Date().getTime()
-    return jwt.encode({ sub: user.id, iat: timestamp}, 'secret')
+    // const timestamp = new Date().getTime()
+    return jwt.sign({user: user}, 'secret', {expiresIn: 7200});
 }
 
 exports.signup = function(req, res, next){
