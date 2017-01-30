@@ -9,5 +9,6 @@ var User = require('../models/user.model');
 router.post('/', UserController.signup);
 
 router.post('/signin', UserController.signin);
+router.get('/', UserController.getAllUsers)
 
 module.exports = router;
