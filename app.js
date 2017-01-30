@@ -7,9 +7,10 @@ var http = require('http')
 
 var appRoutes = require('./routes/app');
 var userRoutes = require('./routes/user');
+var ticketRoutes = require('./routes/ticket');
 
 var app = express();
-mongoose.connect('localhost:27017/node-angular');
+mongoose.connect('localhost:27017/ticket3');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,7 +31,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-
+app.use('/ticket', ticketRoutes);
 app.use('/user', userRoutes);
 app.use('/', appRoutes);
 
