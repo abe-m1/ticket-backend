@@ -81,5 +81,21 @@ exports.signin = function(req, res, next){
         });
     });
 
-    
+}
+
+
+exports.getAllUsers =function(req, res, next) {
+   User.find({}, function( err, users) {
+     if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        res.status(200).json({
+            message: 'Successfully returned all user',
+            users: users            
+        });
+
+   })
 }
