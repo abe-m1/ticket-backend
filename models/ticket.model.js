@@ -3,8 +3,12 @@ const Schema = mongoose.Schema
 
 const ticketSchema = new Schema({
     title : String ,
-    categories: String,
-    content: String,
+    category: String,
+    description: String,
+    dateCreated: String,
+    dateLastModified: String,
+    status: String,
+    assignedTo: String,
     user: {type: Schema.Types.ObjectId, ref: 'User'},
     imageUrl: String
 })

@@ -14,7 +14,13 @@ exports.newTicket = function (req, res, next) {
         }
         var ticket = new Ticket({
             content: req.body.content,
-            user: user
+            user: user,
+            title : req.body.title ,
+            category: req.body.category,
+            description: req.body.description,
+    
+            status: 'new',
+            
         });
         ticket.save(function (err, result) {
             if (err) {
