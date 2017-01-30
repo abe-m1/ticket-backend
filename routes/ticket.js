@@ -7,6 +7,8 @@ var User = require('../models/user.model');
 
 router.post('/', TicketController.newTicket);
 router.get('/', TicketController.getAllTickets)
+router.patch('/', TicketController.editTicket)
+
 
 
 
