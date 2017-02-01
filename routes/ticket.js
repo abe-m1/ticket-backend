@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var Message = require('../models/message')
 var jwt = require('jsonwebtoken')
 var TicketController = require('../controllers/ticket_controller')
 
