@@ -19,7 +19,6 @@ router.use('/', function(req, res, next){
     })
 })
 router.post('/', TicketController.newTicket);
-
 router.patch('/:id', TicketController.editTicket)
 router.delete('/id', TicketController.deleteTicket)
 
