@@ -150,3 +150,40 @@ exports.editUser = function (req, res, next) {
     });
 };
 
+exports.deleteUser = function(req, res, next){
+    // var decoded  = jwt.decode(req.query.token)
+    User.findById(req.params.id, function(err, user){
+        if (err){
+             return res.status(500).json({
+            title: 'an error occured',
+            error: err
+            })
+        } 
+        if (!user){
+            return res.status(500).json({
+                title: 'no user found',
+                error: {message: 'user not found'}
+            })
+        }
+        
+
+       
+        user.remove(function(err, result){
+        if (err){
+            return res.status(500).json({
+                title: 'an error occured',
+                error: err
+
+            })
+        }
+        console.log('saved')
+        res.status(200).json({
+            message: 'user ticket',
+            obj: result
+        })
+    })
+       
+    })
+}
+
+
