@@ -94,3 +94,48 @@ exports.editTicket = function (req, res, next) {
     });
 };
 
+
+exports.deleteTicket = function(req, res, next){
+    var decoded  = jwt.decode(req.query.token)
+    Ticket.findById(req.params.id, function(err, ticket){
+        if (err){
+             return res.status(500).json({
+            title: 'an error occured',
+            error: err
+            })
+        } 
+        if (!ticket){
+            return res.status(500).json({
+                title: 'no ticket found',
+                error: {message: 'ticket not found'}
+            })
+        }
+        if (ticket.user != decoded.user._id){
+            
+            return res.status(401).json({
+                title: 'not authenticated',
+                error: { message : 'users do not match'}
+                })
+            }
+
+       
+        ticket.remove(function(err, result){
+        if (err){
+            return res.status(500).json({
+                title: 'an error occured',
+                error: err
+
+                //need return for error , so that it exits after error
+                //instead of continuing down 
+            })
+        }
+        console.log('saved')
+        res.status(200).json({
+            message: 'deleted ticket',
+            obj: result
+        })
+    })
+       
+    })
+}
+
