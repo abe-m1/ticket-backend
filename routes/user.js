@@ -11,5 +11,6 @@ router.post('/', UserController.signup);
 router.post('/signin', UserController.signin);
 router.get('/', UserController.getAllUsers)
 router.get('/:id', UserController.getOneUser)
+router.patch('/:id', UserController.editUser)
 
 module.exports = router;
