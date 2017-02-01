@@ -12,5 +12,6 @@ router.post('/signin', UserController.signin);
 router.get('/', UserController.getAllUsers)
 router.get('/:id', UserController.getOneUser)
 router.patch('/:id', UserController.editUser)
+router.delete('/:id', UserController.deleteUser)
 
 module.exports = router;
