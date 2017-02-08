@@ -55,6 +55,7 @@ exports.signup = function(req, res, next){
 exports.signin = function(req, res, next){
     
     User.findOne({email: req.body.email}, function(err, user) {
+       
         if (err) {
             return res.status(500).json({
                 title: 'An error occurred',
@@ -62,13 +63,13 @@ exports.signin = function(req, res, next){
             });
         }
         if (!user) {
-            return res.status(401).json({
+            return res.status(404).json({
                 title: 'Login failed',
                 error: {message: 'Invalid login credentials'}
             });
         }
         if (!bcrypt.compareSync(req.body.password, user.password)) {
-            return res.status(401).json({
+            return res.status(405).json({
                 title: 'Login failed',
                 error: {message: 'Invalid login credentials'}
             });
