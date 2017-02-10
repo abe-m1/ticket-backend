@@ -22,7 +22,8 @@ exports.getAllTickets = function (req, res, next) {
 };
 
 exports.newTicket = function (req, res, next) {
-   var decoded = jwt.decode(req.query.token);
+   var decoded = jwt.verify(req.headers.token, 'secret');
+   console.log(decoded)
     User.findById(decoded.user._id, function (err, user) {
         if (err) {
             return res.status(500).json({
