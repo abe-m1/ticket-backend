@@ -6,13 +6,17 @@ var mongoose = require('mongoose');
 var http = require('http')
 
 var config = require('./config')
+const helpers = require('./helpers')
 
 var appRoutes = require('./routes/app');
 var userRoutes = require('./routes/user');
 var ticketRoutes = require('./routes/ticket');
 
+
+
 var app = express();
 mongoose.connect(config.db);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -47,7 +51,6 @@ app.use(function (req, res, next) {
 
 
 //server setup
-console.log('config', config)
 const port = process.env.PORT || config.port
 
 //create HTTP server and forward it to our express application
