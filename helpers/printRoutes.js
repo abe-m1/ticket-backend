@@ -22,4 +22,4 @@ module.exports = function (routes, src, mount) {
     console.log(table.toString());
 
     return table;
-}; d
+}; 
