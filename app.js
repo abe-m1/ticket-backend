@@ -5,6 +5,8 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var http = require('http')
 
+var config = require('./config')
+
 var appRoutes = require('./routes/app');
 var userRoutes = require('./routes/user');
 var ticketRoutes = require('./routes/ticket');
@@ -45,7 +47,8 @@ app.use(function (req, res, next) {
 
 
 //server setup
-const port = process.env.PORT || 5000
+console.log('config', config)
+const port = process.env.PORT || config.port
 
 //create HTTP server and forward it to our express application
 const server = http.createServer(app)
