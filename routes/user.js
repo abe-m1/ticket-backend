@@ -1,19 +1,4 @@
 
-
-// router.post('/', UserController.signup);
-
-// router.post('/signin', UserController.signin);
-// router.get('/', UserController.getAllUsers)
-// router.get('/:id', UserController.getOneUser)
-// router.patch('/:id', UserController.editUser)
-// router.delete('/:id', UserController.deleteUser)
-
-// module.exports = router;
-
-
-
-
-
 var userController = require('../controllers/user_controller')
 
 function init(Router) {
