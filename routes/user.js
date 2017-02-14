@@ -1,10 +1,4 @@
-// var express = require('express');
-// var router = express.Router();
-// var bcrypt = require('bcryptjs');
-// var jwt = require('jsonwebtoken');
-// var UserController = require('../controllers/user_controller')
 
-// var User = require('../models/user.model');
 
 // router.post('/', UserController.signup);
 
@@ -23,12 +17,17 @@
 var userController = require('../controllers/user_controller')
 
 function init(Router) {
-     Router.route('/authenticate') 
+    Router.post('/signin', userController.signin)
+     Router.route('/user') 
         .post(userController.signup)
-        .get(userController.test)
+        .get(userController.getAllUsers)
 
-    Router.route('/practice')
-        .get(userController.test)
+    Router.route('/user/:id')
+        .get(userController.getOneUser)
+        .patch(userController.editUser)
+        .delete(userController.deleteUser)
+
+    
 
 
  }
