@@ -52,6 +52,12 @@ exports.signup = function(req, res, next){
     })
 }
 
+exports.test = function(req,res,next){
+    return res.status(200).json({
+        message: ' this is working'
+    })
+}
+
 exports.signin = function(req, res, next){
     
     User.findOne({email: req.body.email}, function(err, user) {

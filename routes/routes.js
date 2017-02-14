@@ -11,6 +11,7 @@ function init(app) {
 
 // Attach Routes to Router instance
 for (const route in routes) {
+    console.log('Routes', routes)
     if (routes.hasOwnProperty(route)) {
         const element = routes[route];
         element.init(Router);

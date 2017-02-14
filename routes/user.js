@@ -20,14 +20,14 @@
 
 
 
-var UserController = require('../controllers/user_controller')
+var userController = require('../controllers/user_controller')
 
 function init(Router) {
-     Router.post('/authenticate', userController.signup)
+     Router.route('/authenticate') 
+        .post(userController.signup)
+        .get(userController.test)
 
-//     Router.route('/forgotpw')
-//         .post(userController.forgotPW)
-//         .put(userController.changePW)
+
  }
 
 module.exports.init = init

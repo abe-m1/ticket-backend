@@ -7,16 +7,20 @@ var http = require('http')
 
 var config = require('./config')
 const helpers = require('./helpers')
+const routes = require('./routes')
 
-var appRoutes = require('./routes/app');
-var userRoutes = require('./routes/user');
-var ticketRoutes = require('./routes/ticket');
+
+// var appRoutes = require('./routes/app');
+// var userRoutes = require('./routes/user');
+// var ticketRoutes = require('./routes/ticket');
 
 
 
 var app = express();
 mongoose.connect(config.db);
 
+apiRouter = routes.init(app)
+// helpers.printRoutes(apiRouter.stack, 'Router', apiRouter.mountPath)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,12 +38,12 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
-    next();
+    // next();
 });
 
-app.use('/ticket', ticketRoutes);
-app.use('/user', userRoutes);
-app.use('/', appRoutes);
+// app.use('/ticket', ticketRoutes);
+// app.use('/user', userRoutes);
+// app.use('/', appRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -60,4 +64,4 @@ const server = http.createServer(app)
 server.listen(port)
 console.log('server listen on: ', port)
 
-module.exports = app
+module.exports.app = app
