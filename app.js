@@ -20,7 +20,7 @@ var app = express();
 mongoose.connect(config.db);
 
 apiRouter = routes.init(app)
-// helpers.printRoutes(apiRouter.stack, 'Router', apiRouter.mountPath)
+helpers.printRoutes(apiRouter.stack, 'Router', apiRouter.mountPath)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

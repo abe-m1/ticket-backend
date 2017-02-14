@@ -27,6 +27,9 @@ function init(Router) {
         .post(userController.signup)
         .get(userController.test)
 
+    Router.route('/practice')
+        .get(userController.test)
+
 
  }
 

@@ -9,7 +9,7 @@ module.exports = function (routes, src, mount) {
     console.log('********************************************\n');
     for (const key in routes) {
         if (routes.hasOwnProperty(key)) {
-            const val = routes[key];
+            let val = routes[key];
             if (val.route) {
                 val = val.route;
                 const _o = {},
