@@ -1,7 +1,7 @@
-// var express = require('express');
-// var router = express.Router();
-// var jwt = require('jsonwebtoken')
-// var TicketController = require('../controllers/ticket_controller')
+ var express = require('express');
+ var router = express.Router();
+ var jwt = require('jsonwebtoken')
+ var ticketController = require('../controllers/ticket_controller')
 
 
 
@@ -31,6 +31,16 @@
 
 
 function init(Router) {
+    
+    Router.get('/ticket', ticketController.getAllTickets)
+     
+    Router.post('/ticket', ticketController.newTicket)
+    Router.route('/ticket/:id')
+        
+        .patch(ticketController.editTicket)
+        .delete(ticketController.deleteTicket)
+
+    
    
 }
 
