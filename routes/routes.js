@@ -2,7 +2,7 @@ const Router = require('express').Router(),
     helpers = require('../helpers'),
     routes = helpers.require(__dirname);
 
-Router.mountPath = '/';
+Router.mountPath = '/api';
 
 function init(app) {
     app.use(Router.mountPath, Router);
