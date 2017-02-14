@@ -33,6 +33,18 @@
 function init(Router) {
     
     Router.get('/ticket', ticketController.getAllTickets)
+//     Router.use('/', function(req, res, next){
+//      jwt.verify(req.headers.token, 'secret', function(err, decoded){
+//          //get decoded back, difference between verify and decode, below
+//          if (err){
+//              return res.status(401).json({
+//                  title: 'not authenticated',
+//                  error: err
+//              })
+//          }
+//          next()
+//      })
+//  })
      
     Router.post('/ticket', ticketController.newTicket)
     Router.route('/ticket/:id')
