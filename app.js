@@ -17,7 +17,7 @@ const routes = require('./routes')
 
 
 var app = express();
-mongoose.connect(config.db);
+// mongoose.connect(config.db);
 
 
 // view engine setup
