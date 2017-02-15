@@ -1,3 +1,3 @@
-module.exports = 'localhost:27017/ticket3'
-
-
+module.exports = { db: 'localhost:27017/ticket3',
+                     jwtSecret: 'secret'
+                    }
