@@ -41,6 +41,7 @@ app.use(function (req, res, next) {
      next();
 });
 
+config.init(app)
 apiRouter = routes.init(app)
 helpers.printRoutes(apiRouter.stack, 'Router', apiRouter.mountPath)
 // app.use('/ticket', ticketRoutes);
