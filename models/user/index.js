@@ -1,1 +1,1 @@
-module.exports = require('./userSchema.js')
+module.exports = require('./user.model.js')
