@@ -12,6 +12,8 @@ userSchema.plugin(mongooseUniqueValidator);
 userMethods(userSchema)
 userStatics(userSchema)
 
+
+
 module.exports = mongoose.model('User', userSchema);
 
 

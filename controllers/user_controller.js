@@ -60,6 +60,7 @@ exports.test = function(req,res,next){
 
 exports.signin = function(req, res, next){
     console.log('REQ>BODY',req.body)
+    User.hello()
     User.findOne({email: req.body.email}, function(err, user) {
        
         if (err) {

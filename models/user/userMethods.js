@@ -7,6 +7,7 @@ function addMethods(schema) {
 
 
 
+
     Promise.promisifyAll(schema.methods)
     return schema
 }
