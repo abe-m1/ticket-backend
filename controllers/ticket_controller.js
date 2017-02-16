@@ -1,5 +1,5 @@
 const User = require('../models/user')
-const Ticket = require('../models/ticket.model')
+const Ticket = require('../models/ticket')
 var bcrypt = require('bcryptjs');
 const jwt  = require('jsonwebtoken')
 
