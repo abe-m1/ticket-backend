@@ -1,17 +1,9 @@
 const mongoose  = require('mongoose')
 const Schema = mongoose.Schema
+const ticketModel = require('./ticketModel.js')
 
-const ticketSchema = new Schema({
-    title : String ,
-    category: String,
-    description: String,
-    dateCreated: String,
-    dateLastModified: String,
-    status: String,
-    assignedTo: String,
-    user: {type: Schema.Types.ObjectId, ref: 'User'},
-    imageUrl: String
-})
+
+ticketSchema = new mongoose.Schema(ticketModel)
 
 
 
