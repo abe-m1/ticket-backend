@@ -4,14 +4,11 @@ const User = mongoose.model('User')
 
 
 
-// This checks by ip for development mode
-function authMiddleware(req, res, next) {
-    
-    console.log('midleware running')
+function authMiddleware(req, res, next) {        
     const token = req.headers['authorization']
 
     if (!token) {
-        res.json(   { message: 'missing token', status: 401 })
+        res.json({ message: 'missing token', status: 401 })
     }
 
     const decoded = verifyJwt(token)
@@ -21,28 +18,19 @@ function authMiddleware(req, res, next) {
     } 
 
     req.decoded = decoded
-
     next()
-
 }
 
 function signin(req, res, next) {
-    res.json({ message: 'route has been reached' })
-    
+    res.json({ message: 'route has been reached' })    
 }
-
-
-
 
 
 function init(app) {
-    // Route to get authorized
+    // routes before middleware don't require token
    app.post('/api/testsignin', signin);
-    app.use(authMiddleware);
-    
+   app.use(authMiddleware);    
 }
-
-
 
 
 // module.exports = authMiddleware;
