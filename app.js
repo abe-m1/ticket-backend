@@ -1,13 +1,13 @@
 var express = require('express');
 var path = require('path');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
+
 var mongoose = require('mongoose');
 var http = require('http')
 
 var config = require('./config')
 const helpers = require('./helpers')
 const routes = require('./routes')
+const middleware = require('./middleware')
 
 
 // var appRoutes = require('./routes/app');
@@ -24,23 +24,9 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
-// app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
-     next();
-});
-
+middleware.init(app)
 config.init(app)
 apiRouter = routes.init(app)
 helpers.printRoutes(apiRouter.stack, 'Router', apiRouter.mountPath)
