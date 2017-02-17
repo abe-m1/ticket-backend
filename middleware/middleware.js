@@ -1,5 +1,6 @@
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+const auth = require('./auth.js')
 
 
 
@@ -20,5 +21,6 @@ module.exports.init = (app) => {
         next();
     });
 
+    auth.init(app)
 
 }
