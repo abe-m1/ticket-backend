@@ -58,6 +58,13 @@ exports.test = function(req,res,next){
     })
 }
 
+exports.signin = function(req, res, next) {
+    res.json({ message: 'signin route has been reached' })    
+}
+exports.signout= function(req, res, next) {
+    res.json({ message: 'signout route has been reached' })    
+    }
+
 exports.signin = function(req, res, next){
     console.log('REQ>BODY',req.body)
 
