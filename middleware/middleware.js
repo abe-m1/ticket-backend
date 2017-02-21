@@ -1,6 +1,7 @@
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 const authMiddleware = require('./auth.js')
+const userController = require('../controllers/user_controller')
 
 
 
@@ -21,15 +22,10 @@ module.exports.init = (app) => {
         next();
     });
 
-    function signin(req, res, next) {
-    res.json({ message: 'signin route has been reached' })    
-}
-function signout(req, res, next) {
-    res.json({ message: 'signout route has been reached' })    
-    }
+    
 
-    app.post('/api/testsignin', signin);
-    app.get('/api/testsignout', signout);
+    app.post('/api/testsignin', userController.signin1);
+    app.get('/api/testsignout', userController.signout1);
     app.use(authMiddleware)
 
 }
