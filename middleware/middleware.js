@@ -24,8 +24,8 @@ module.exports.init = (app) => {
 
     
 
-    app.post('/api/testsignin', userController.signin1);
-    app.get('/api/testsignout', userController.signout1);
+    app.post('/api/signin', userController.signin);
+    app.post('api/signup', userController.signup)
     app.use(authMiddleware)
 
 }
