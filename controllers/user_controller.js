@@ -7,7 +7,7 @@ function tokenForUser(user){
     return jwt.sign({user: user}, 'secret', {expiresIn: 7200});
 }
 
-exports.signup = function(req, res, next){
+const signup = function(req, res, next){
 
     console.log('REq Body', req.body)
     const firstName = req.body.firstName
@@ -58,14 +58,9 @@ exports.test = function(req,res,next){
     })
 }
 
-exports.signin1 = function(req, res, next) {
-    res.json({ message: 'signin route has been reached' })    
-}
-exports.signout1= function(req, res, next) {
-    res.json({ message: 'signout route has been reached' })    
-    }
 
-exports.signin = function(req, res, next){
+
+const signin = function(req, res, next){
     console.log('REQ>BODY',req.body)
 
     User.findOne({email: req.body.email}, function(err, user) {
@@ -199,6 +194,11 @@ exports.deleteUser = function(req, res, next){
     })
        
     })
+}
+
+module.exports = {
+    signin: signin,
+    signup: signup
 }
 
 
