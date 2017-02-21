@@ -4,7 +4,7 @@ var bcrypt = require('bcryptjs');
 const jwt  = require('jsonwebtoken')
 
 
-exports.getAllTickets = function (req, res, next) {
+const getAllTickets = function (req, res, next) {
     Ticket.find()
         .populate('user', 'firstName')
         .exec(function (err, tickets) {
@@ -21,7 +21,7 @@ exports.getAllTickets = function (req, res, next) {
         });
 };
 
-exports.newTicket = function (req, res, next) {
+const newTicket = function (req, res, next) {
     console.log('headers', req.headers)
    var decoded = jwt.verify(req.headers.token, 'secret');
    console.log(decoded)
@@ -59,7 +59,7 @@ exports.newTicket = function (req, res, next) {
     });
 };
 
-exports.editTicket = function (req, res, next) {
+const editTicket = function (req, res, next) {
     var decoded = jwt.decode(req.query.token);
     Ticket.findById(req.params.id, function (err, ticket) {
         if (err) {
@@ -97,7 +97,7 @@ exports.editTicket = function (req, res, next) {
 };
 
 
-exports.deleteTicket = function(req, res, next){
+const deleteTicket = function(req, res, next){
     var decoded  = jwt.decode(req.query.token)
     Ticket.findById(req.params.id, function(err, ticket){
         if (err){
@@ -141,3 +141,9 @@ exports.deleteTicket = function(req, res, next){
     })
 }
 
+module.exports = {
+    getAllTickets: getAllTickets,
+    newTicket: newTicket,
+    editTicket: editTicket,
+    deleteTicket: deleteTicket
+}
