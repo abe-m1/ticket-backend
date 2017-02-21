@@ -21,9 +21,15 @@ module.exports.init = (app) => {
         next();
     });
 
-   
+    function signin(req, res, next) {
+    res.json({ message: 'signin route has been reached' })    
+}
+function signout(req, res, next) {
+    res.json({ message: 'signout route has been reached' })    
+    }
 
     app.post('/api/testsignin', signin);
+    app.get('/api/testsignout', signout);
     app.use(authMiddleware)
 
 }
