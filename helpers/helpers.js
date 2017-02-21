@@ -17,7 +17,16 @@ function reqDir(dir) {
     return reqObj;
 }
 
+function failure(req, next, status) {
+    return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+}
+
+
 module.exports = {
     printRoutes: print,
-    require: reqDir
+    require: reqDir,
+    failure: failure
 }
