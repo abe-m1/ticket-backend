@@ -52,7 +52,7 @@ const signup = function(req, res, next){
     })
 }
 
-exports.test = function(req,res,next){
+const  test = function(req,res,next){
     return res.status(200).json({
         message: ' this is working'
     })
@@ -95,7 +95,7 @@ const signin = function(req, res, next){
 }
 
 
-exports.getAllUsers =function(req, res, next) {
+const getAllUsers =function(req, res, next) {
    User.find({}, function( err, users) {
      if (err) {
             return res.status(500).json({
@@ -112,7 +112,7 @@ exports.getAllUsers =function(req, res, next) {
 }
 
 
-exports.getOneUser =  function( req, res, next ) {	
+const getOneUser =  function( req, res, next ) {	
   	User.findById( req.params.id , function(err, user){
           if (err) {
             return res.status(500).json({
@@ -128,7 +128,7 @@ exports.getOneUser =  function( req, res, next ) {
 }
 
 
-exports.editUser = function (req, res, next) {
+const editUser = function (req, res, next) {
     var decoded = jwt.decode(req.query.token);
     User.findById(req.params.id, function (err, ticket) {
         if (err) {
@@ -160,7 +160,7 @@ exports.editUser = function (req, res, next) {
     });
 };
 
-exports.deleteUser = function(req, res, next){
+const deleteUser = function(req, res, next){
     // var decoded  = jwt.decode(req.query.token)
     User.findById(req.params.id, function(err, user){
         if (err){
@@ -198,7 +198,15 @@ exports.deleteUser = function(req, res, next){
 
 module.exports = {
     signin: signin,
-    signup: signup
+    signup: signup,
+    routeTest: test,
+    getAllUsers: getAllUsers,
+    getOneUser: getOneUser,
+    editUser: editUser,
+    deleteUser: deleteUser
+
+
+
 }
 
 
