@@ -1,6 +1,6 @@
 var logger = require('morgan');
 var bodyParser = require('body-parser');
-const auth = require('./auth.js')
+const authMiddleware = require('./auth.js')
 
 
 
@@ -21,6 +21,9 @@ module.exports.init = (app) => {
         next();
     });
 
-    auth.init(app)
+   
+
+    app.post('/api/testsignin', signin);
+    app.use(authMiddleware)
 
 }

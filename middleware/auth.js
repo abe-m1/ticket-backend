@@ -21,17 +21,13 @@ function authMiddleware(req, res, next) {
     next()
 }
 
-function signin(req, res, next) {
-    res.json({ message: 'route has been reached' })    
-}
 
 
-function init(app) {
-    // routes before middleware don't require token
-   app.post('/api/testsignin', signin);
-   app.use(authMiddleware);    
-}
 
 
-// module.exports = authMiddleware;
-module.exports.init = init;
+   
+   
+
+
+
+ module.exports = authMiddleware;
