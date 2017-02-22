@@ -11,6 +11,8 @@ function init(Router) {
         .get(userController.getOneUser)
         .patch(userController.editUser)
         .delete(userController.deleteUser)
+    Router.route('/forgot')
+        .get(userController.forgotPassword)
 
     
 
