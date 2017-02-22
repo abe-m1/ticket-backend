@@ -211,6 +211,7 @@ const forgotPassword = function(req, res, next){
             return crypto.randomBytesAsync(32).then(function(buf) {
             const token = buf.toString('hex')
             user.reset_password_token = token
+            user.reset_password_set_at = Date.now() + 3600000; // 1 hour
             sendEmail(user.email, token)
             console.log('forgot password token = ', token)
             return user.save().then(user => {
