@@ -3,6 +3,7 @@ var bcrypt = require('bcryptjs');
 const jwt  = require('jsonwebtoken')
 const Promise = require('bluebird')
 const crypto = Promise.promisifyAll(require('crypto'))
+const Helpers = require('../helpers')
 
 
 
@@ -210,8 +211,14 @@ const forgotPassword = function(req, res, next){
             return crypto.randomBytesAsync(32).then(function(buf) {
             const token = buf.toString('hex')
             user.reset_password_token = token
+            sendEmail(user.email, token)
             console.log('forgot password token = ', token)
-            return user.save().then(user => console.log(user))
+            return user.save().then(user => {
+                return res.status(200).json({
+            message: 'user ticket',
+            obj: user
+        })
+            })
             })
     })        
 }
@@ -226,6 +233,16 @@ function sendEmail(email, token) {
           'http://localhost:8100#/app' + '/reset/' + token + '\n\n' +
           'If you did not request this, please ignore this email and your password will remain unchanged.\n'
     }
+
+    Helpers.email.transporter.sendMail(mailOptions, (err, info) => {
+        if (err) console.log(err)
+        if (info) {
+            console.log("Message sent: " + info.response)
+        }
+
+    })
+
+}
 
 
     
