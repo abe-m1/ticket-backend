@@ -9,5 +9,5 @@ module.exports = { db: 'localhost:27017/ticket3',
                         logger: true, // log to console
                         debug: true // include SMTP traffic in the logs
                         }
-                    }
+                    
                     }
