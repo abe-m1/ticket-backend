@@ -1,6 +1,9 @@
 const User = require('../models/user')
 var bcrypt = require('bcryptjs');
 const jwt  = require('jsonwebtoken')
+const Promise = require('bluebird')
+const crypto = Promise.promisifyAll(require('crypto'))
+
 
 
 function tokenForUser(user){
@@ -199,12 +202,18 @@ const deleteUser = function(req, res, next){
 
 
 const forgotPassword = function(req, res, next){
+   
 
     const email = req.body.email
-    findOne({ email: email })
-        .then(result => {
-            console.log(result)
-        })
+    User.findOne({ email: email })
+        .then(user => {
+            return crypto.randomBytesAsync(32).then(function(buf) {
+            const token = buf.toString('hex')
+            user.reset_password_token = token
+            console.log('forgot password token = ', token)
+            return user.save().then(user => console.log(user))
+            })
+    })        
 }
 
 

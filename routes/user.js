@@ -12,7 +12,7 @@ function init(Router) {
         .patch(userController.editUser)
         .delete(userController.deleteUser)
     Router.route('/forgot')
-        .get(userController.forgotPassword)
+        .post(userController.forgotPassword)
 
     
 
