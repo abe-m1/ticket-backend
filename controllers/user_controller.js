@@ -197,6 +197,17 @@ const deleteUser = function(req, res, next){
     })
 }
 
+
+const forgotPassword = function(req, res, next){
+
+    const email = req.body.email
+    findOne({ email: email })
+        .then(result => {
+            console.log(result)
+        })
+}
+
+
 module.exports = {
     signin: signin,
     signup: signup,
@@ -204,7 +215,8 @@ module.exports = {
     getAllUsers: getAllUsers,
     getOneUser: getOneUser,
     editUser: editUser,
-    deleteUser: deleteUser
+    deleteUser: deleteUser,
+    forgotPassword: forgotPassword
 
 
 

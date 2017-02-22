@@ -1,4 +1,4 @@
-// const jwt = require('../helpers/jwt.js')
+jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 const User = mongoose.model('User')
 
@@ -11,7 +11,8 @@ function authMiddleware(req, res, next) {
         res.json({ message: 'missing token', status: 401 })
     }
 
-    const decoded = verifyJwt(token)
+    const decoded = jwt.decode(token);
+    
 
     if (!decoded) {
         res.json({ message: 'bad token', status: 401 })
