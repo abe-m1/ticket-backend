@@ -1,5 +1,5 @@
 const User = require('../models/user')
-var bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 const jwt  = require('jsonwebtoken')
 const Promise = require('bluebird')
 const crypto = Promise.promisifyAll(require('crypto'))
@@ -244,10 +244,6 @@ function sendEmail(email, token) {
 
 }
 
-
-    
-
-
 module.exports = {
     signin: signin,
     signup: signup,
@@ -257,9 +253,6 @@ module.exports = {
     editUser: editUser,
     deleteUser: deleteUser,
     forgotPassword: forgotPassword
-
-
-
 }
 
 
