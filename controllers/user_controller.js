@@ -256,8 +256,8 @@ function resetPassword( req, res ) {
           }
           const password =  bcrypt.hashSync(req.body.password, 10)
          user.password = password
-         user.resetPasswordToken = null
-         user.resetPasswordExpires = null
+         user.reset_password_token = null
+         user.reset_password_set_at = null
 
          user.save( function( err, user ) {
             return res.status(200).json({
