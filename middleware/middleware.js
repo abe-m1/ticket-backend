@@ -27,7 +27,7 @@ module.exports.init = (app) => {
     app.post('/api/signin', userController.signin);
     app.post('/api/signup', userController.signup)
     app.post('/api/forgot', userController.forgotPassword)
-    app.post('/api/reset', userController.resetPassword)
+    app.post('/api/reset/:token', userController.resetPassword)
     // app.use(authMiddleware)
 
 }
