@@ -13,6 +13,8 @@ function init(Router) {
         .delete(userController.deleteUser)
     Router.route('/forgot')
         .post(userController.forgotPassword)
+    Router.route('/test')
+        .get(userController.routeTest)
 
     
 

@@ -57,10 +57,9 @@ const signup = function(req, res, next){
     })
 }
 
-const  test = function(req,res,next){
-    return res.status(200).json({
-        message: ' this is working'
-    })
+
+const test  = (req, res, next) => {
+	return res.status(200).json({ message: ' this is working' })	
 }
 
 
