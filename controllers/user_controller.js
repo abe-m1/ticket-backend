@@ -213,7 +213,7 @@ const forgotPassword = (req, res, next) =>{
             const token = buf.toString('hex')
             user.reset_password_token = token
             user.reset_password_set_at = Date.now() + 3600000; // 1 hour
-            sendEmail(user.email, token)
+            sendEmailForForgot(user.email, token)
             console.log('forgot password token = ', token)
             return user.save().then(user => {
                 return res.status(200).json({
@@ -224,8 +224,8 @@ const forgotPassword = (req, res, next) =>{
     })        
 }
 
-function sendEmail(email, token) {
-    const mailOptions = {
+function sendEmailForForgot(email, token) {
+    let mailOptions = {
         from: 'ticketApp',
         to: email,
         subject: 'TicketApp Password Reset',
@@ -245,36 +245,30 @@ function sendEmail(email, token) {
 
 }
 
-function sendEmailOnReset(email, mailOptions, token ) {
-    //mailOptions
-
-    Helpers.email.transporter.sendMail(mailOptions, (err, info) => {
-        if (err) console.log(err)
-        if (info) {
-            console.log("Message sent: " + info.response)
-        }
-
-    })
-
-}
-
-const mailOptionsForForgot = {
-        from: 'ticketApp',
-        to: email,
-        subject: 'TicketApp Password Reset',
-        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-          'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-          'http://localhost:8100#/app' + '/reset/' + token + '\n\n' +
-          'If you did not request this, please ignore this email and your password will remain unchanged.\n'
-    }
-
-const mailOptionsForReset = {
- 				to: user.email,
+function sendEmailForReset(email) {
+    let mailOptions= {
+ 				to: email,
  				from: 'TicketApp Password Reset',
  				subject: 'Your password has been changed',
  				text: 'Hello,\n\n' +
- 				'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+ 				'This is a confirmation that the password for your account ' + email + ' has just been changed.\n'
  			}
+
+    Helpers.email.transporter.sendMail(mailOptions, (err, info) => {
+        if (err) console.log(err)
+        if (info) {
+            console.log("Message sent: " + info.response)
+        }
+
+    })
+
+}
+
+
+
+
+
+
 
 
 
@@ -292,8 +286,10 @@ function resetPassword( req, res ) {
          user.password = password
          user.reset_password_token = null
          user.reset_password_set_at = null
-         sendEmailOnReset(user.email)
+         
          user.save( function( err, user ) {
+             sendEmailForReset(user.email)
+             
             return res.status(200).json({
             message: 'password updated',
             obj: user
