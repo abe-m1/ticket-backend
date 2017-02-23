@@ -254,14 +254,16 @@ function resetPassword( req, res ) {
             res.json( 'Password reset token is invalid or has expired.' )
             return
           }
-
-         user.password = req.body.password
+          const password =  bcrypt.hashSync(req.body.password, 10)
+         user.password = password
          user.resetPasswordToken = null
          user.resetPasswordExpires = null
 
          user.save( function( err, user ) {
- 			
-        console.log('Message sent successfully!');
+            return res.status(200).json({
+            message: 'password updated',
+            obj: user
+        })
         
     }) 
          } )
