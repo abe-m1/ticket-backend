@@ -245,6 +245,29 @@ function sendEmail(email, token) {
 
 }
 
+function sendEmailOnReset(email, token) {
+    const mailOptions = {
+ 				to: user.email,
+ 				from: 'TicketApp Password Reset',
+ 				subject: 'Your password has been changed',
+ 				text: 'Hello,\n\n' +
+ 				'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+ 			}
+
+    Helpers.email.transporter.sendMail(mailOptions, (err, info) => {
+        if (err) console.log(err)
+        if (info) {
+            console.log("Message sent: " + info.response)
+        }
+
+    })
+
+}
+
+
+
+
+
 function resetPassword( req, res ) {
    
     
@@ -257,7 +280,7 @@ function resetPassword( req, res ) {
          user.password = password
          user.reset_password_token = null
          user.reset_password_set_at = null
-
+         sendEmailOnReset(user.email)
          user.save( function( err, user ) {
             return res.status(200).json({
             message: 'password updated',
