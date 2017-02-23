@@ -12,7 +12,7 @@ function tokenForUser(user){
     return jwt.sign({user: user}, 'secret', {expiresIn: 7200});
 }
 
-const signup = function(req, res, next){
+const signup = (req, res, next) =>{
 
     console.log('REq Body', req.body)
     const firstName = req.body.firstName
@@ -31,7 +31,7 @@ const signup = function(req, res, next){
             return res.status(422).send({ error: 'email already in use'})
         }
 
-        var user = new User({
+        const user = new User({
         firstName:  firstName,
         lastName:  lastName,
         password:  password,
@@ -64,7 +64,7 @@ const test  = (req, res, next) => {
 
 
 
-const signin = function(req, res, next){
+const signin = (req, res, next) => {
     console.log('REQ>BODY',req.body)
 
     User.findOne({email: req.body.email}, function(err, user) {
@@ -87,7 +87,7 @@ const signin = function(req, res, next){
                 error: {message: 'Invalid login credentials'}
             });
         }
-        var token = tokenForUser(user)
+        const token = tokenForUser(user)
         res.status(200).json({
             message: 'Successfully logged in',
             token: token,
@@ -99,7 +99,8 @@ const signin = function(req, res, next){
 }
 
 
-const getAllUsers =function(req, res, next) {
+
+const getAllUsers = (req, res, next)=> {
    User.find({}, function( err, users) {
      if (err) {
             return res.status(500).json({
@@ -116,7 +117,7 @@ const getAllUsers =function(req, res, next) {
 }
 
 
-const getOneUser =  function( req, res, next ) {	
+const getOneUser = ( req, res, next ) => {	
   	User.findById( req.params.id , function(err, user){
           if (err) {
             return res.status(500).json({
@@ -132,8 +133,8 @@ const getOneUser =  function( req, res, next ) {
 }
 
 
-const editUser = function (req, res, next) {
-    var decoded = jwt.decode(req.query.token);
+const editUser = (req, res, next) => {
+    const decoded = jwt.decode(req.query.token);
     User.findById(req.params.id, function (err, ticket) {
         if (err) {
             return res.status(500).json({
@@ -164,7 +165,7 @@ const editUser = function (req, res, next) {
     });
 };
 
-const deleteUser = function(req, res, next){
+const deleteUser = (req, res, next)=> {
     // var decoded  = jwt.decode(req.query.token)
     User.findById(req.params.id, function(err, user){
         if (err){
@@ -201,7 +202,7 @@ const deleteUser = function(req, res, next){
 }
 
 
-const forgotPassword = function(req, res, next){
+const forgotPassword = (req, res, next) =>{
    
 
     const email = req.body.email
