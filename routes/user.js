@@ -1,8 +1,8 @@
-var authMiddleware = require('../middleware')
+
 var userController = require('../controllers/user_controller')
 
 function init(Router) {
-    Router.post('/signin', userController.signin)
+    // Router.post('/signin', userController.signin)
      Router.route('/user') 
         .post(userController.signup)
         .get(userController.getAllUsers)

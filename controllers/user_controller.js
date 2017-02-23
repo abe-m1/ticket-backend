@@ -8,6 +8,7 @@ const Helpers = require('../helpers')
 
 
 function tokenForUser(user){
+    console.log('run')
     // const timestamp = new Date().getTime()
     return jwt.sign({user: user}, 'secret', {expiresIn: 7200});
 }
