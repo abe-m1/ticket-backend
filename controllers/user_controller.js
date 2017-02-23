@@ -217,8 +217,7 @@ const forgotPassword = (req, res, next) =>{
             console.log('forgot password token = ', token)
             return user.save().then(user => {
                 return res.status(200).json({
-            message: 'user ticket',
-            obj: user
+            message: 'email sent to user for reset'
         })
             })
             })
