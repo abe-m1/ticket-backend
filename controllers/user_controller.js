@@ -245,6 +245,29 @@ function sendEmail(email, token) {
 
 }
 
+function resetPassword( req, res ) {
+   
+    
+       User.findOne( { reset_password_token: req.params.token, reset_password_set_at: { $gt: Date.now() } }, function( err, user ) {
+          if ( !user ) {
+            res.json( 'Password reset token is invalid or has expired.' )
+            return
+          }
+
+         user.password = req.body.password
+         user.resetPasswordToken = null
+         user.resetPasswordExpires = null
+
+         user.save( function( err, user ) {
+ 			
+        console.log('Message sent successfully!');
+        
+    }) 
+         } )
+       
+    
+ }
+
 module.exports = {
     signin: signin,
     signup: signup,
@@ -253,7 +276,8 @@ module.exports = {
     getOneUser: getOneUser,
     editUser: editUser,
     deleteUser: deleteUser,
-    forgotPassword: forgotPassword
+    forgotPassword: forgotPassword,
+    resetPassword: resetPassword
 }
 
 

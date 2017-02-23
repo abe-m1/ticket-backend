@@ -1,4 +1,4 @@
-
+var authMiddleware = require('../middleware')
 var userController = require('../controllers/user_controller')
 
 function init(Router) {
@@ -11,8 +11,7 @@ function init(Router) {
         .get(userController.getOneUser)
         .patch(userController.editUser)
         .delete(userController.deleteUser)
-    Router.route('/forgot')
-        .post(userController.forgotPassword)
+    
     Router.route('/test')
         .get(userController.routeTest)
 
